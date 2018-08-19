@@ -1,0 +1,61 @@
+
+    <div  class="top-container">
+        <span class="topMenu"><span>+ Configure a new data pipeline</span></span>
+    </div>
+<div class="pl-container">
+    <div *ngIf="formActive" class="pl-overlay"></div>
+    <div *ngFor="let pipeline of pipelines" style="position:relative;">
+        <span  class="ppl-name {{pipeline.status}}" contenteditable="true" spellcheck="false">{{pipeline.pipelineName}}</span>
+        <div *ngIf="!pipeline.items || pipeline.items.length==0" class="pl-pipeline" [style.width]="pipeline.options.defaultMinimalLineWidth" [style.height]="pipeline.options.defaultLineHeight">
+        </div>
+        <div  *ngFor="let item of pipeline.items" class="pl-item-container">
+            <div class="pl-item" (click)="handlePipelineItemClick(pipeline, item, $event.target)">
+                <div class="pl-pipeline before" [style.width]="pipeline.options.defaultLineWidth" [style.height]="pipeline.options.defaultLineHeight" [ngClass]="{'first':item._itemType=='endpoint'}"></div>
+
+                <div style="position:relative">
+                    <div class="pl-item-text">{{item._lazyData.name}}</div>
+                    <div class="pl-pl-svg {{item._itemType}}" >
+                        <svg height="22" width="20"> <circle cx="10" cy="10" fill="none" r="9" stroke-width="2.5"></circle> </svg>
+                    </div>
+                </div>
+                <div class="pl-pipeline after" [style.width]="pipeline.options.defaultMinimalLineWidth" [style.height]="pipeline.options.defaultLineHeight"></div>
+
+            </div>
+
+        </div>
+
+
+
+        <span class="pl-save" (click)="deletePipeline(pipeline)">X</span>
+        <span class="pl-save" (click)="pipeline.status!='running' ? saveAndRunPipeline(pipeline) : stopPipeline(pipeline)">{{pipeline.status=='running' ? 'stop' : 'save and start'}}</span>
+    </div>
+
+    <div class="pl-form-container">
+        <pipeline-item-form (completeForm)="completeForm($event)" [(formActive)]="formActive" [(formType)]="formType"></pipeline-item-form>
+    </div>
+</div>
+    <div class="pl-bottom-container">
+        <div class="pl-legend">
+            <div>
+                <div class="pl-legend-svg ppl" (click)="addPipeline()">
+                    <i class="fa fa-plus"> </i>
+                </div><span>Endpoint/New Pipeline</span>
+            </div>
+            <div><div class="pl-legend-svg bdt" (click)="addDataTransformation()">
+               <svg height="20" width="20"> <circle cx="10" cy="10" fill="none" r="8" stroke-width="1"></circle> </svg>
+                </div><span>Big Data transformations</span></div>
+            <div><div class="pl-legend-svg mdt" (click)="addModelTraining()">
+               <svg height="20" width="20"> <circle cx="10" cy="10" fill="none" r="8" stroke-width="1"></circle> </svg>
+                </div><span>Model training</span></div>
+            <div><div class="pl-legend-svg dbt" (click)="addDatabaseTransaction()">
+                <svg height="20" width="20"> <circle cx="10" cy="10" fill="none" r="8" stroke-width="1"></circle> </svg>
+                </div><span>Database transaction</span></div>
+            <div><div class="pl-legend-svg out" (click)="addOutput()">
+                <svg height="20" width="20"> <circle cx="10" cy="10" fill="none" r="8" stroke-width="1"></circle> </svg>
+                </div><span>Output</span></div>
+
+        </div>
+
+
+
+    </div>
