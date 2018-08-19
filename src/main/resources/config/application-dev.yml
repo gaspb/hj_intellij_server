@@ -41,8 +41,8 @@ spring:
         stream:
             kafka:
                 binder:
-                    brokers: localhost
-                    zk-nodes: localhost
+                    brokers: 192.168.99.100
+                    zk-nodes: 192.168.99.100
             bindings:
                 output:
                     destination: topic-jhipster
@@ -95,7 +95,8 @@ jhipster:
             limit: 100000
             duration-in-seconds: 3600
         authorized-microservices-endpoints: # Access Control Policy, if left empty for a route, all endpoints will be accessible
-            app1: /api,/v2/api-docs # recommended dev configuration
+            app1: /* 
+            ms1: /api,/v2/api-docs # recommended dev configuration
     http:
         version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
     cache: # Cache configuration

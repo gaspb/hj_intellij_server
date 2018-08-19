@@ -37,6 +37,7 @@ public class WebsocketConfiguration extends AbstractWebSocketMessageBrokerConfig
 
     public WebsocketConfiguration(JHipsterProperties jHipsterProperties) {
         this.jHipsterProperties = jHipsterProperties;
+
     }
 
     @Override
@@ -52,6 +53,11 @@ public class WebsocketConfiguration extends AbstractWebSocketMessageBrokerConfig
             .setAllowedOrigins(allowedOrigins)
             .withSockJS()
             .setInterceptors(httpSessionHandshakeInterceptor());
+        registry.addEndpoint("/websocket/ws1")
+            .setHandshakeHandler(defaultHandshakeHandler())
+            .setAllowedOrigins(allowedOrigins)
+            .withSockJS()
+            .setInterceptors(httpSessionHandshakeInterceptor());
     }
 
     @Bean
@@ -63,13 +69,13 @@ public class WebsocketConfiguration extends AbstractWebSocketMessageBrokerConfig
                 if (request instanceof ServletServerHttpRequest) {
                     ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
                     attributes.put(IP_ADDRESS, servletRequest.getRemoteAddress());
+
                 }
                 return true;
             }
 
             @Override
             public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
-
             }
         };
     }
@@ -82,7 +88,7 @@ public class WebsocketConfiguration extends AbstractWebSocketMessageBrokerConfig
                 if (principal == null) {
                     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
                     authorities.add(new SimpleGrantedAuthority(AuthoritiesConstants.ANONYMOUS));
-                    principal = new AnonymousAuthenticationToken("WebsocketConfiguration", "anonymous", authorities);
+                    principal = new AnonymousAuthenticationToken("WebsocketConfiguration", "anonymousUser", authorities);
                 }
                 return principal;
             }

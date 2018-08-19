@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { AccountService } from './account.service';
-import { JhiTrackerService } from '../tracker/tracker.service'; // Barrel doesn't work here. No idea why!
+import {Injectable} from "@angular/core";
+import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
+import {AccountService} from "./account.service";
+import {JhiTrackerService} from "../tracker/tracker.service";
+import {Ws1MessageService} from "../tracker/ws1-message.service"; // Barrel doesn't work here. No idea why!
 
 @Injectable()
 export class Principal {
@@ -12,7 +13,8 @@ export class Principal {
 
     constructor(
         private account: AccountService,
-        private trackerService: JhiTrackerService
+        private trackerService: JhiTrackerService,
+        private ws1MessageService: Ws1MessageService
     ) {}
 
     authenticate(identity) {
@@ -69,6 +71,7 @@ export class Principal {
                 this.userIdentity = account;
                 this.authenticated = true;
                 this.trackerService.connect();
+                this.ws1MessageService.connect();
             } else {
                 this.userIdentity = null;
                 this.authenticated = false;
@@ -76,9 +79,15 @@ export class Principal {
             this.authenticationState.next(this.userIdentity);
             return this.userIdentity;
         }).catch((err) => {
+            console.log("caught erre in principal service : ")
             if (this.trackerService.stompClient && this.trackerService.stompClient.connected) {
                 this.trackerService.disconnect();
             }
+            if (this.ws1MessageService.stompClient && this.ws1MessageService.stompClient.connected) {
+                this.ws1MessageService.disconnect();
+            }
+
+
             this.userIdentity = null;
             this.authenticated = false;
             this.authenticationState.next(this.userIdentity);

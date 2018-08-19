@@ -10,7 +10,43 @@ Main page styles
     background: url("../../content/images/hipster.png") no-repeat center top;
     background-size: contain;
 }
+.square {
+    float:left;
+    position: relative;
+    width: 30%;
+    padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+    margin:1.66%;
+    background-color:#1E1E1E;
+    overflow:hidden;
+}
 
+.content {
+    position:absolute;
+    height:90%; /* = 100% - 2*5% padding */
+    width:90%; /* = 100% - 2*5% padding */
+    padding: 5%;
+
+}
+.table{
+    display:table;
+    width:100%;
+    height:100%;
+}
+.table-cell{
+    display:table-cell;
+    vertical-align:middle;
+}
+ul{
+    text-align:left;
+    color: #ffffff;
+    margin:5% 0 0;
+    padding:0;
+    list-style-position:inside;
+}
+li{
+    margin: 0 0 0 5%;
+    padding:0;
+}
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media
 only screen and (-webkit-min-device-pixel-ratio: 2),
@@ -23,4 +59,135 @@ only screen and (                min-resolution: 2dppx) {
         background: url("../../content/images/hipster2x.png") no-repeat center top;
         background-size: contain;
     }
+}
+.menu--dustu .menu__item {
+    /* font-family: 'Work Sans', serif;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em 0;
+    width: max-content;
+}
+
+.menu--dustu .menu__item-name {
+    /*   font-size: 1.75em;
+       font-weight: bold;*/
+    overflow: hidden;
+    padding: 0 0.25em;
+    color: #fff;
+    position: relative;
+}
+
+.menu--dustu .menu__item-name::before,
+.menu--dustu .menu__item-name::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    transform: translate3d(-100%,0,0) translate3d(-1px,0,0);
+    transition: transform 0.7s;
+    transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+.menu--dustu .menu__item-name.green::before,
+.menu--dustu .menu__item-name.green::after {
+    background: rgb(108, 138, 98);
+}
+.menu--dustu .menu__item-name.red::before,
+.menu--dustu .menu__item-name.red::after {
+    /*background: rgb(121, 44, 42);*/
+    background:  rgb(127, 70, 69);
+}
+.menu--dustu .menu__item-name.blue::before,
+.menu--dustu .menu__item-name.blue::after {
+    background: rgb(83, 110, 140);
+}
+.menu--dustu .menu__item-name.yellow::before,
+.menu--dustu .menu__item-name.yellow::after {
+    background: rgb(189, 185, 160);
+}
+
+.menu--dustu .menu__item:hover .menu__item-name::before {
+    transform: translate3d(100%,0,0) translate3d(1px,0,0);
+}
+
+.menu--dustu .menu__item:hover .menu__item-name::after {
+    transform: translate3d(0,0,0);
+}
+
+.menu--dustu .menu__item-name::after {
+
+    top: calc(50%);
+    height: 3px;
+}
+
+.menu--dustu .menu__item-label{
+    /*         font-size: 1em;
+             margin: 0.5em 0 0 0;
+             margin-top: 0.25em;
+             padding: 0.5em;*/
+    color: #565656;
+    border-color: #565656;
+    transition: color 0.7s, border-color 0.7s;
+    transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+    cursor:pointer;
+    justify-content: space-evenly;
+    display: flex;
+}
+
+.menu--dustu .home-card-desc{
+    /*         font-size: 1em;
+             margin: 0.5em 0 0 0;
+             margin-top: 0.25em;
+             padding: 0.5em;*/
+
+    transition: color  0.7s;
+    transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+
+}
+.menu--dustu .home-card-desc{
+    /*         font-size: 1em;
+             margin: 0.5em 0 0 0;
+             margin-top: 0.25em;
+             padding: 0.5em;*/
+
+    transition: max-height  0.7s;
+    transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+
+}
+.menu--dustu .menu__item:hover .menu__item-label {
+    color: #fff;
+    border: 1px solid #f6f4f1;
+    border-radius: 10px;
+    width: max-content;
+    padding: 5px;
+    margin: 5px;
+}
+.menu--dustu .menu__item:hover .home-card-desc {
+    color: #565656;
+    max-height: 100px;
+    overflow-y: hidden;
+    -webkit-transition: max-height 0.5s ease-in-out;
+    -moz-transition: max-height 0.5s ease-in-out;
+    -o-transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.5s ease-in-out;
+}
+.menu--dustu .menu__item:hover .home-subcard {
+
+}
+.menu__item-label.right {
+    width: 50%;
+    text-align: left;
+    margin-left: 10px;
+}
+.menu__item-label.left {
+    width: 50%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.fullpage-router {
+    height:100%;
 }

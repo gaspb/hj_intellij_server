@@ -1,8 +1,8 @@
 package fr.hija.gtw.security.oauth2;
 
-import fr.hija.gtw.config.oauth2.OAuth2Properties;
 import com.google.common.net.InetAddresses;
 import com.google.common.net.InternetDomainName;
+import fr.hija.gtw.config.oauth2.OAuth2Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.json.JsonParser;
@@ -83,7 +83,7 @@ public class OAuth2CookieHelper {
      * @param cookieName the case-sensitive name of the cookie to get.
      * @return the resulting Cookie; or null, if not found.
      */
-    private static Cookie getCookie(HttpServletRequest request, String cookieName) {
+    public static Cookie getCookie(HttpServletRequest request, String cookieName) {
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if (cookie.getName().equals(cookieName)) {

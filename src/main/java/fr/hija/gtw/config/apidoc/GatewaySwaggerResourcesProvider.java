@@ -1,22 +1,19 @@
 package fr.hija.gtw.config.apidoc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.jhipster.config.JHipsterConstants;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.*;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.netflix.zuul.filters.Route;
 import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-
 import springfox.documentation.swagger.web.SwaggerResource;
 import springfox.documentation.swagger.web.SwaggerResourcesProvider;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Retrieves all registered microservices Swagger resources.
@@ -52,6 +49,7 @@ public class GatewaySwaggerResourcesProvider implements SwaggerResourcesProvider
 
         return resources;
     }
+
 
     private SwaggerResource swaggerResource(String name, String location) {
         SwaggerResource swaggerResource = new SwaggerResource();

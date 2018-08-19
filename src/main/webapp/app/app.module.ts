@@ -1,30 +1,40 @@
-import './vendor.ts';
+import "./vendor.ts";
 
-import { NgModule, Injector } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Ng2Webstorage } from 'ngx-webstorage';
-import { JhiEventManager } from 'ng-jhipster';
+import {Injector, NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {Ng2Webstorage} from "ngx-webstorage";
+import {JhiEventManager} from "ng-jhipster";
 
-import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
-import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
-import { NotificationInterceptor } from './blocks/interceptor/notification.interceptor';
-import { GtwSharedModule, UserRouteAccessService } from './shared';
-import { GtwAppRoutingModule} from './app-routing.module';
-import { GtwHomeModule } from './home/home.module';
-import { GtwAdminModule } from './admin/admin.module';
-import { GtwAccountModule } from './account/account.module';
-import { GtwEntityModule } from './entities/entity.module';
-import { PaginationConfig } from './blocks/config/uib-pagination.config';
+import {AuthExpiredInterceptor} from "./blocks/interceptor/auth-expired.interceptor";
+import {ErrorHandlerInterceptor} from "./blocks/interceptor/errorhandler.interceptor";
+import {NotificationInterceptor} from "./blocks/interceptor/notification.interceptor";
+import {GtwSharedModule, UserRouteAccessService} from "./shared";
+import {GtwAppRoutingModule} from "./app-routing.module";
+import {GtwHomeModule} from "./home/home.module";
+import {GtwAdminModule} from "./admin/admin.module";
+import {GtwAccountModule} from "./account/account.module";
+import {GtwEntityModule} from "./entities/entity.module";
+import {PaginationConfig} from "./blocks/config/uib-pagination.config";
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
+    ErrorComponent,
+    FooterComponent,
     JhiMainComponent,
     NavbarComponent,
-    FooterComponent,
-    ProfileService,
     PageRibbonComponent,
-    ErrorComponent
-} from './layouts';
+    ProfileService
+} from "./layouts";
+import {GtwIotModule} from "./iot/iot.module";
+import {GtwWs1Module} from "./demos/realtime/ws1.module";
+
+import {MSTemplateModule} from "./framework/mstemplate.module";
+import {PlaygroundModule} from "./playground/playground.module";
+import {StackComponent} from "./layouts/stack/stack.component";
+import {GtwDocumentationModule} from "./documentation/documentation.module";
+import {GtwDashboardModule} from "./dashboard/dashboard.module";
+import {GtwRepoModule} from "./repository/repo.module";
+
 
 @NgModule({
     imports: [
@@ -36,11 +46,19 @@ import {
         GtwAdminModule,
         GtwAccountModule,
         GtwEntityModule,
+        GtwIotModule,
+        GtwWs1Module,
+        MSTemplateModule,
+        PlaygroundModule,
+        GtwDocumentationModule,
+        GtwDashboardModule,
+        GtwRepoModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
         JhiMainComponent,
         NavbarComponent,
+        StackComponent,
         ErrorComponent,
         PageRibbonComponent,
         FooterComponent

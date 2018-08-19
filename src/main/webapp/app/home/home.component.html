@@ -1,41 +1,88 @@
 <div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
-    </div>
-    <div class="col-md-9">
-        <h1 class="display-4">Welcome, Java Hipster!</h1>
-        <p class="lead">This is your homepage</p>
 
-        <div [ngSwitch]="isAuthenticated()">
+    <div class="cont1">
+        <div class="col-md-2">
+        </div>
+
+        <div [ngSwitch]="isAuthenticated()" style="display:none">
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span *ngIf="account"
                    > You are logged in as user "{{account.login}}". </span>
+                <span *ngIf="account"
+                > This platform is a gateway for different not-so-connected microservices projects.
+                It gives you the possibility to test the REST api and interact with our deloyed microservices.</span>
             </div>
 
             <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>If you want to </span>
-                <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
-            </div>
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>You don't have an account yet?</span>
-                <a class="alert-link" routerLink="register">Register a new account</a>
+              Work In Progress
             </div>
         </div>
 
-        <p>
-            If you have any question on JHipster:
-        </p>
+        <div class="home-card-container menu menu--dustu">
+        <div class=" menu__item">
+            <a class=" home-card menu__item-name yellow">
+                Gateway
+            </a>
+            <div class=" home-card-panel">
+                <div class="home-card-desc">The Gateway let you test your microservices' API and generates the appropriate Front-End based on data type and/or on a YAML configuration file. It also allows you to manage the cloud configuration to scale your microservices.</div>
+                <div style="width:100%; display:flex;align-items: center;justify-content: center;">
+                <span style="width:33%" class=" menu__item-label left" routerLink="documentation">Documentation</span>
+                <span style="width:33%" class="menu__item-label " routerLink="dashboard" routerLinkActive="active">Dashboard</span>
+                    <span  style="width:33%" class="menu__item-label right" routerLink="repository" routerLinkActive="active">Repository</span>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="home-card-container menu menu--dustu">
+            <div class="  menu__item">
+                <a class=" home-card menu__item-name red " routerLink="playground" routerLinkActive="active">
+                    Playground
+                </a>
+                <div class=" home-card-panel">
+                    <div class="home-card-desc">The Playground allows you to create nodes between all connected microservices' exposed API, templates and YAML configuration file for you MS, either through the Command Line Interface or with the online Dashboard </div>
+                    <div style="width:100%; display:flex;align-items: center;justify-content: center">
+                    <span style="width:33%;" class=" menu__item-label left">CLI</span>
+                    <span style="width:33%;" class="menu__item-label right" routerLink="playground" routerLinkActive="active">
+                        Canvas
+                    </span>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="home-card-container menu menu--dustu">
+            <div class="  menu__item">
+                <a class=" home-card menu__item-name green" routerLink="lab" routerLinkActive="active">
+                    Demos
+                </a>
+                <div class=" home-card-panel">
+                    <div class="home-card-desc">Scalable features and microservices under development. Some will join the gateway upon completion, while others will help us test and improve our system</div>
+                    <div style="width:100%; display:flex;align-items: center;justify-content: center">
+                        <span style="width:33%;" routerLink="demo-ws1" class=" menu__item-label left">Realtime</span>
+                        <span style="width:33%;" class="menu__item-label right">WIP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <ul>
-            <li><a href="http://www.jhipster.tech/" target="_blank" rel="noopener">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener">follow @java_hipster on Twitter</a></li>
-        </ul>
 
-        <p>
-            <span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener">GitHub</a>!
-        </p>
+        <div class="home-card-container menu menu--dustu">
+            <div class=" menu__item">
+                <a class=" home-card menu__item-name blue">
+                    About
+                </a>
+                <div class=" home-card-panel" style="width: 110%;">
+                    <div class="home-card-desc">&nbsp;</div>
+                    <div style="width:110%; display:flex;align-items: center;justify-content: center;margin-left: -5%;">
+                        <span style="width:33%" class=" menu__item-label left" routerLink="hjl-documentation">Our Jira</span>
+                        <span style="width:33%" class="menu__item-label " >HighJack's Lab</span>
+                        <span style="width:33%" class="menu__item-label ">Special thanks</span>
+                        <span  style="width:35%" class="menu__item-label right">Fork us on Github</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+
     </div>
 </div>

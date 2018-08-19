@@ -1,21 +1,23 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
+import {DatePipe} from "@angular/common";
 
 import {
-    GtwSharedLibsModule,
-    GtwSharedCommonModule,
-    CSRFService,
-    AuthServerProvider,
     AccountService,
-    UserService,
-    StateStorageService,
-    LoginService,
-    LoginModalService,
-    JhiLoginModalComponent,
-    Principal,
-    JhiTrackerService,
+    AuthServerProvider,
+    CSRFService,
+    GtwSharedCommonModule,
+    GtwSharedLibsModule,
     HasAnyAuthorityDirective,
-} from './';
+    JhiLoginModalComponent,
+    JhiTrackerService,
+    LoginModalService,
+    LoginService,
+    Principal,
+    StackService,
+    StateStorageService,
+    UserService,
+    Ws1MessageService
+} from "./";
 
 @NgModule({
     imports: [
@@ -34,7 +36,9 @@ import {
         Principal,
         CSRFService,
         JhiTrackerService,
+        Ws1MessageService,
         AuthServerProvider,
+        StackService,
         UserService,
         DatePipe
     ],
