@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="col-md-12">
+        <span class="lead">PLAYGROUND</span>
+        <span class="pg-menu" (click)="operationView=false;currView='tp'" [ngClass]="{ 'pg-menu-selected': currView=='tp'}">Template view</span>
+        <span class="pg-menu" (click)="operationView=true;currView='op'" [ngClass]="{ 'pg-menu-selected': currView=='op'}">Operation view</span>
+        <span class="pg-menu" (click)="operationView=false;currView='dp'" [ngClass]="{ 'pg-menu-selected': currView=='dp'}">Pipeline view</span>
+
+    </div>
+    <div class="pg-container" >
+
+        <div class="col-md-10 dragto" style="background-color: #f5f5f5;overflow-y: hidden;" [hidden]="currView!='op'">
+
+            <operation-view [opView]="true" [(draggedItem)]="draggedItem" (updateVar)="updateVar($event)" ></operation-view>
+
+        </div>
+        <div class="col-md-10 dragto" style="background-color: #ffffff;" [hidden]="currView!='tp'">
+            <operation-view (toggleOpMenu)="toggleOp($event)" [opView]="false" [(draggedItem)]="draggedItem"></operation-view>
+
+        </div>
+
+        <div class="dragto pl-view" [hidden]="currView!='dp'">
+            <pipeline-view (toggleOpMenu)="toggleOp($event)" [opView]="false"></pipeline-view>
+
+        </div>
+
+        <div class="col-md-2 dnd-entry-container" *ngIf="currView=='op'" style="height:90%">
+            OPERATION MENU
+            <div class="op-help-submenu"><span>Help</span><span>API</span><span>About</span></div>
+            <ul class="op-menu-entry op-mses" data-item="0">
+               <span  (click)="isToggledOpMenu = isToggledOpMenu=='ms' ?  'false': 'ms'">Microservices</span>
+
+                <li class="dragfrom op-ms" data-item="1" *ngFor="let ms of MSes" [hidden]="isToggledOpMenu!='ms'">
+                    <div (click)="isToggledMs = (isToggledMs==ms) ? false : ms">
+                        <div><span class="property">SID : </span><span class="">{{ms.serviceId}}</span></div>
+                        <div><span class="property">path : </span><span class="">{{ms.path}}</span></div>
+                    </div>
+                    <ul *ngIf="isToggledMs==ms">
+                        <li  *ngFor="let api of ms.apiDoc" (dragstart)="dragStart('api', api)" draggable="true" class="apiList op-draggable" (click)="isToggledApi =  api; isDraggable=  api" [ngClass]="{ 'op-toggled': isToggledApi==api  && isDraggable==api}">
+                            <span class="api-title ">{{api.path+' :'+api.reqType}}</span>
+                            <div [hidden]="isToggledApi!=api || isDraggable!=api" class="api-desc">
+
+                                <div><span class="property prop-io">input : </span><span class="">{{api.inputDataType || 'none'}}</span></div>
+                                <div><span class="property prop-io">output : </span><span class="">{{api.outputDataType || 'none'}}</span></div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </li>
+
+
+                        </ul>
+                        <ul class="op-menu-entry" data-item="0">
+                            <span (click)="isToggledOpMenu = isToggledOpMenu=='op' ?  'false': 'op'">Operations</span>
+                            <li  draggable="true" class="dragfrom op-draggable"  *ngFor="let op of OPes" [hidden]="isToggledOpMenu!='op'" (dragstart)="dragStart('operation', op)"  style="list-style-type: square;" [ngClass]="{ 'op-toggled': isToggledOp==op && isDraggable==op}"  (click)="isToggledOp = op; isDraggable= op">
+                                <span>
+                                    {{op.operationName}}
+                                </span>
+                                 <div class="desc">{{op.desc || ''}}</div>
+                                <div [hidden]="isToggledOp!=op || isDraggable!=op" style="font-size: small;margin-left: 5px;">
+                                   <!-- <div class="desc">{{op.body.inputDesc || ''}}</div>-->
+                                    <div><span class="property prop-io">inputType : </span>{{op.input || 'none'}}</div>
+                                    <!--<div class="desc">{{op.body.outputDesc || ''}}</div>-->
+                                    <div><span class="property prop-io">outputType : </span>{{op.output || 'none'}}</div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul class="op-menu-entry op-converters" data-item="0" >
+                            <span (click)="isToggledOpMenu = isToggledOpMenu=='cv' ?  'false': 'cv'">Converters</span>
+                            <li [hidden]="isToggledOpMenu!='cv'"  (dragstart)="dragStart('converter', {title: ['New Map']})" draggable="true" class="dragfrom"> [ New Map ]</li>
+                            <li [hidden]="isToggledOpMenu!='cv'"  draggable="true" class="dragfrom"  *ngFor="let conv of converters" (dragstart)="dragStart('converter', conv)" >
+                                <span title="{{conv.desc}}">{{conv.title}}</span>
+                            </li>
+
+                        </ul>
+                        <ul class="op-menu-entry op-holders"  style="text-align: left;">
+                            <span (click)="isToggledOpMenu = isToggledOpMenu=='hl' ?  'false': 'hl'">Data Holders</span>
+                          <li [hidden]="isToggledOpMenu!='hl'"  (dragstart)="dragStart('holder', {type: 'holder', title: 'Async Holder'})" draggable="true" class="dragfrom">Async holder</li>
+                            <li [hidden]="isToggledOpMenu!='hl'" (dragstart)="dragStart('holder', {type: 'divider', title: 'Input Divider'})" draggable="true" class="dragfrom">Input divider</li>
+                        </ul>
+                        <ul class="op-menu-entry op-input-box" style="text-align: left;">
+                            <span  (click)="isToggledOpMenu = isToggledOpMenu=='in' ?  'false': 'in'">Inputs</span>
+                            <li [hidden]="isToggledOpMenu!='in'" (dragstart)="dragStart('inputContainer', null)" draggable="true" class="dragfrom ">dropzone</li>
+                        </ul>
+
+
+
+            <ul class="op-menu-entry op-public-api" data-item="0">
+                <span (click)="isToggledOpMenu = isToggledOpMenu=='pa' ?  'false': 'pa'">Public APIs</span>
+                <li  draggable="true" class="dragfrom op-draggable"  *ngFor="let pa of pbcApis" [hidden]="isToggledOpMenu!='pa'" (dragstart)="dragStart('publicApi', pa)"  style="list-style-type: square;" [ngClass]="{ 'op-toggled': isToggledOp==op && isDraggable==op}"  (click)="isToggledOp = pa">
+                                <span>
+                                    {{pa.title}}
+                                </span>
+                    <div class="desc">{{pa.desc || ''}}</div>
+                    <div [hidden]="isToggledOp!=pa" style="font-size: small;margin-left: 5px;">
+                        <!-- <div class="desc">{{op.body.inputDesc || ''}}</div>-->
+                        <div><span class="property prop-io">inputType : </span>{{pa.body.inputType || 'none'}}</div>
+                        <!--<div class="desc">{{op.body.outputDesc || ''}}</div>-->
+                        <div><span class="property prop-io">outputType : </span>{{pa.body.outputType || 'none'}}</div>
+                    </div>
+                </li>
+            </ul>
+                        <br/>
+                        <div [hidden]="true">
+                        <div >New Holder (keep your input data waiting for a MS response(ex: string input > ask a ms for language detection, hold input in holder while ms calculate, use converter to map input and ms output, then output to the trad ms). Can perform async operations)</div>
+                        <div>Double click on a line to divide the output !</div>
+                        <div>You also can drag and drop any file to be used as an input</div>
+                        <div>{{test3}}</div>
+                        <ul *ngFor="let route of routes">
+                            <li>
+                                <div>{{route.path}}</div>
+                                <div>{{route.serviceId}}</div>
+                            </li>
+                        </ul></div>
+
+        </div>
+        <div class="col-md-2 dnd-entry-container" *ngIf="currView=='tp'"  style="height:90%" >
+            TEMPLATE MENU
+            <div class="op-help-submenu"><span>Help</span><span>API</span><span>About</span></div>
+            <div class="op-menu-entry" data-item="0">
+
+                <span (click)="isToggledOpMenu = isToggledOpMenu=='tp-opp' ?  'false': 'tp-opp'">Operations</span>
+                <li [hidden]="isToggledOpMenu!='tp-opp'" draggable="false" class=""  *ngFor="let op of OPes" (dragstart)="return;"  style="list-style-type: square;" [ngClass]="{ 'op-toggled': isToggledOp==op && isDraggable==op}"  (click)="isToggledOp = op; isDraggable= op">
+                                <span>
+                                    {{op.operationName}}
+                                </span>
+                    <div class="desc">{{op.desc || ''}}</div>
+                    <div [hidden]="isToggledOp!=op" style="font-size: small;margin-left: 5px;" [ngClass]="{'op-io-container-active' :  op.active && (op.active.input || op.active.output)}">
+                        <!-- <div class="desc">{{op.body.inputDesc || ''}}</div>-->
+                        <div class="prop-io-cont" [ngClass]="{'op-io-active' :  op.active && op.active.input}" (click)="handleOpTpConnect(op)"><span class="property prop-io prop-op" >Connect input : </span>{{op.input|| 'none'}}</div>
+                        <!--<div class="desc">{{op.body.outputDesc || ''}}</div>-->
+                        <div class="prop-io-cont" [ngClass]="{'op-io-active' :  op.active && op.active.output}" (click)="handleOpTpConnect(op)"><span class="property prop-io prop-op">Connect output : </span>{{op.output || 'none'}}</div>
+                    </div>
+                </li>
+            </div>
+            <div class="op-menu-entry op-draggable" data-item="0">
+                <span (click)="isToggledOpMenu = isToggledOpMenu=='tp-in' ?  'false': 'tp-in'">Inputs</span>
+                <li [hidden]="isToggledOpMenu!='tp-in'" draggable="true" class="dragfrom" data-item="1">Custom input</li>
+                <li [hidden]="isToggledOpMenu!='tp-in'" draggable="true" class="dragfrom op-draggable" data-item="2" (dragstart)="dragStart('tp-text', null)" (touchmove)="dragStart('tp-text', null)">textarea</li>
+                <li [hidden]="isToggledOpMenu!='tp-in'" draggable="true" class="dragfrom op-draggable" data-item="3" (dragstart)="dragStart('tp-button', null)" (touchstart)="dragStart('tp-button', null)">button</li>
+                <li [hidden]="isToggledOpMenu!='tp-in'"  (dragstart)="dragStart('inputContainer', null)" draggable="true" class="dragfrom">dropzone</li>
+
+
+            </div>
+            <ul class="op-menu-entry op-draggable" data-item="0">
+                <span (click)="isToggledOpMenu = isToggledOpMenu=='tp-out' ?  'false': 'tp-out'">Outputs</span>
+
+                <li [hidden]="isToggledOpMenu!='tp-out'" draggable="true" class="dragfrom" data-item="1">New Output Type (?)</li>
+                <li [hidden]="isToggledOpMenu!='tp-out'" draggable="true" class="dragfrom op-draggable" data-item="2" (dragstart)="dragStart('tp-text-out', null)">textarea</li>
+                <li [hidden]="isToggledOpMenu!='tp-out'" draggable="true" class="dragfrom" data-item="3">JSON</li>
+                <li [hidden]="isToggledOpMenu!='tp-out'" draggable="true" class="dragfrom" data-item="3">Stream</li>
+                <li [hidden]="isToggledOpMenu!='tp-out'" draggable="true" class="dragfrom" data-item="3">Datatable</li>
+
+            </ul>
+            <ul class="op-menu-entry op-draggable" data-item="0">
+                <span (click)="isToggledOpMenu = isToggledOpMenu=='tp-lm' ?  'false': 'tp-lm'">Link modules</span>
+                <li [hidden]="isToggledOpMenu!='tp-lm'" draggable="true" class="dragfrom" data-item="1">Link</li>
+                <li [hidden]="isToggledOpMenu!='tp-lm'" draggable="true" class="dragfrom" data-item="2">Button</li>
+                <li [hidden]="isToggledOpMenu!='tp-lm'" draggable="true" class="dragfrom" data-item="3">Submit</li>
+
+            </ul>
+        </div>
+    </div>
+</div>

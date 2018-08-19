@@ -1,0 +1,66 @@
+<div *ngIf="formActive">
+
+    <div class="pl-form {{formType}}">
+        <div [ngSwitch]="formType">
+            <div *ngSwitchCase="'endpoint'">
+
+                    <form>
+                        <div *ngIf="!formItem.type">
+                            <label for="pl-endpoint-form-type" >Endpoint type</label>
+                            <select id="pl-endpoint-form-type" (change)="formItem.type=$event.srcElement.value; getOps();">
+                                <option value="" disabled selected></option>
+                                <option value="op">Operation output</option>
+                                <option value="ms">Microservice</option>
+                                <option value="pa">Public API</option>
+                                <option value="ext">External site</option>
+                                <option value="db">Database</option>
+
+                            </select>
+
+                        </div>
+                        <div *ngIf="formItem.type=='op'">
+                            <label for="pl-endpoint-form-op" >Operation output</label>
+                            <select id="pl-endpoint-form-op" (change)="selectOp($event.srcElement.value)">
+                                <option value="" disabled selected></option>
+                                <option *ngFor="let op of ops">{{op.operationName}}</option>
+
+
+                            </select>
+
+                        </div>
+                    </form>
+                </div>
+            <div *ngSwitchCase="'data-transformation'">
+                Please select a data transformation
+                <div class="pl-select-bdt-container">
+                    <div class="pl-square" *ngFor="let bdt of bdts" (click)="selectBdt(bdt)">
+                        <div class="pl-content">
+                            <div class="pl-table">
+                                <div class="pl-table-cell">
+                                    {{bdt}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngSwitchCase="'model-training'">
+                Please select a data transformation
+            </div>
+            <div *ngSwitchCase="'database-transaction'">
+                Please select a data transformation
+            </div>
+            <div *ngSwitchCase="'output'">
+                Please select a data transformation
+            </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
