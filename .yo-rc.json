@@ -1,33 +1,33 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "fr.hija.gtw"
+      "packageName": "org.highjack.ms3"
     },
-    "jhipsterVersion": "4.14.4",
-    "baseName": "gtw",
-    "packageName": "fr.hija.gtw",
-    "packageFolder": "fr/hija/gtw",
-    "serverPort": "8080",
+    "jhipsterVersion": "5.2.1",
+    "applicationType": "microservice",
+    "baseName": "ms3",
+    "packageName": "org.highjack.ms3",
+    "packageFolder": "org/highjack/ms3",
+    "serverPort": "8081",
     "authenticationType": "uaa",
     "uaaBaseName": "uaa",
-    "cacheProvider": "hazelcast",
+    "cacheProvider": "ehcache",
     "enableHibernateCache": false,
-    "websocket": "spring-websocket",
+    "websocket": false,
     "databaseType": "no",
     "devDatabaseType": "no",
     "prodDatabaseType": "no",
     "searchEngine": false,
-    "messageBroker": "kafka",
+    "messageBroker": false,
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
-    "enableSocialSignIn": false,
     "enableSwaggerCodegen": false,
-    "clientFramework": "angularX",
-    "useSass": true,
-    "clientPackageManager": "yarn",
-    "applicationType": "gateway",
+    "jwtSecretKey": "3ef950c30a060c84e840681a3fa3106fc23a3908",
+    "enableTranslation": false,
     "testFrameworks": [],
     "jhiPrefix": "jhi",
-    "enableTranslation": false
+    "clientPackageManager": "yarn",
+    "skipClient": true,
+    "skipUserManagement": true
   }
 }

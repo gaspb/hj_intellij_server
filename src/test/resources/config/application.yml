@@ -3,8 +3,8 @@
 #
 # This configuration is used for unit/integration tests.
 #
-# More information on profiles: http://www.jhipster.tech/profiles/
-# More information on configuration properties: http://www.jhipster.tech/common-application-properties/
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
 # ===================================================================
@@ -15,27 +15,16 @@
 
 eureka:
     client:
-        enabled: true
+        enabled: false
     instance:
-        appname: gtw
-        instanceId: gtw:${spring.application.instance-id:${random.value}}
+        appname: ms3
+        instanceId: ms3:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: gtw
-    jackson:
-        serialization.write_dates_as_timestamps: false
+        name: ms3
     cache:
         type: simple
-    cloud:
-        stream:
-            kafka:
-                binder:
-                    brokers: localhost
-                    zk-nodes: localhost
-            bindings:
-                output:
-                    destination: topic-jhipster
     mail:
         host: localhost
     messages:
@@ -44,10 +33,8 @@ spring:
         favicon:
             enabled: false
     thymeleaf:
-        mode: XHTML
-
-liquibase:
-    contexts: test
+        mode: HTML
+        
 
 server:
     port: 10344
@@ -60,7 +47,7 @@ info:
 # ===================================================================
 # JHipster specific properties
 #
-# Full reference is available at: http://www.jhipster.tech/common-application-properties/
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
 jhipster:
@@ -78,9 +65,14 @@ jhipster:
     security:
         authentication:
             jwt:
-                secret: 
+                secret: 3ef950c30a060c84e840681a3fa3106fc23a3908
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
+        client-authorization:
+            access-token-uri: http://uaa/oauth/token
+            token-service-id: uaa
+            client-id: internal
+            client-secret: internal
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         logs: # Reports Dropwizard metrics in the logs
@@ -93,7 +85,7 @@ jhipster:
 # to have type-safe configuration, like in the JHipsterProperties above
 #
 # More documentation is available at:
-# http://www.jhipster.tech/common-application-properties/
+# https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-application:
+# application:
