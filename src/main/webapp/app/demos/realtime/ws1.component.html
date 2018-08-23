@@ -1,0 +1,39 @@
+<div class="row" style="height:100%">
+    <div [ngClass]="{
+    'col-md-2':!isToggledInfo,
+    'col-md-4':isToggledInfo
+  }" style="border: 2px solid #ffffff70;border-radius: 15px;overflow: auto; height:100%">
+        <div class="general-info" (click)="isToggledInfo = !isToggledInfo">General informations <span>{{isToggledInfo ? '-' : '+'}}</span></div>
+        <div class="hidden">
+            <div  *ngIf="isToggledInfo" style="white-space: pre-line;">This module is currently powered by :
+                <br>-Spring WebSocket and SockJS for sending and receiving instantly messages
+                <br>-Hazelcast, as a distributed cache throughout the application, let us keep in memory the last X messages(here just 20 for easy testing) for each topic in an evicting queue,
+                and serve them instantly to connecting clients. We didn't even use a database for this demo. We will though add a Cassandra instance connected to Kafka to complement HazelCast.
+                <br>This module will then be added to the Gateway.
+                <br>-Angular5 as the renderer. Even if it was almost perfect for the job, we will try soon to implement a second front end on React !
+                <br>Another completely standalone version will also be developped, using Kafka Zookeeper and Cassandra, without the need of a backend.
+                <br>
+                <br>Any ideas or request features ? Join our Jira :)
+
+            </div>
+
+
+        </div>
+    </div>
+    <div [ngClass]="{
+    'col-md-10':!isToggledInfo,
+    'col-md-8':isToggledInfo
+  }" style="height:100%">
+        <h1 class="display-4">Realtime chat application</h1>
+        <p class="lead">General</p>
+
+        <div #wscont class="commonscroll" style="max-height: 60%;overflow: auto;padding-right: 10px;"  #scrollMe [scrollTop]="scrollMe.scrollHeight">
+            <div class="cont-message" *ngFor="let activity of activities" [ngClass]="activity.role">
+                <div class="ws1-user">{{activity.login}} :  <span class="ws1-date">{{activity.time | date:'yyyy-MM-dd HH:mm:ss'}}</span></div>
+                <span class="ws1-body" style="margin-left:5px">{{activity.body}}</span>
+            </div>
+            <textarea class="inputws1" #box (keyup.enter)="onEnteredMessage(box.value); box.value=''"></textarea>
+        </div>
+
+    </div>
+</div>

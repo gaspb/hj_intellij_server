@@ -1,0 +1,64 @@
+
+<div class="documentation-container">
+    <div class="doc-item">
+<p class="doc-title">Process</p>
+<p title="To register, a microservice must specify its API through an accessible config file or a JSON response to the INFO request"><b>1) Deploy some microservices and register</b> them through the API or the app. You can pass-in your user-key if you want them to be private.</p>
+<p><b>2) Build up your technological stack</b> from your microservices or existing backend, the shared services and the ms available in the repository.</p>
+<p><b>3) Connect the microservices together</b> in operations, build templates for inputs and renderers.</p>
+<p><b>4) Generate a working proof-of-concept</b> in-app to test that all</p>
+<p>(Optional : JHipster : build your db with JDL, and it generates backend and front-end through generators )</p>
+<p>(Optional : Jenkins X : passes the code to Github, through Github's quality tests and Travis' tests. Deploys automatically and connects to Highjack'sLab backend until migration )</p>
+<p>(Optional : both. Generates the backend with JDL and Jhipster, passes in with the in-app frontend to Github</p>
+</div>
+
+
+    <div class="doc-item">
+        <p class="doc-title">Registering a microservice</p>
+   <p> Registration can be done multiple ways.</p>
+    <p> We often use a YAML file exposed through the /hjl/info API. You can also use a simple JSON POST request, or use our dedicated module in the Dashboard.</p>
+    <p>Our "OpenAPI" syntax is documented <a>here</a></p>
+    <p>In a close future to be allowed in the public repository, a microservice will have to pass random automatic API checks</p>
+
+    <p>Incoming : propose a configuration with docker env variable</p>
+    </div>
+    <div class="doc-item">
+<p class="doc-title">Shared Services</p>
+<p>These services dedicated to ms communication and security are provided by Highjack'sLab, which gives you the entry points necessary to plug-in easily.</p>
+<p>Some of them are rather stateless and can be included in your final image if you wish (like Kafka or Zookeeper), some other aren't, such as our security OAuth2 server.</p>
+<p>If your making a proof of concept, that doesn't matter. But obviously for production you will need to configure some of it.</p>
+<p>We may include some choices of built-in security verifications through a docker env constant in a close future.</p>
+</div>
+<br>
+    <div class="doc-item">
+<p class="doc-title">Repository</p>
+<p>This contains all the public APIs registered within the app and gracefully shared by users and contributors.</p>
+<p>They can be documented both at the registration and by the users.</p>
+</div>
+
+    <div class="doc-item">
+        <p class="doc-title">Dashboard</p>
+        <p>A powerful stats engine for your registered microservices usage within the app.</p>
+        <p>Powered by Eureka, Zookeeper and some handmade trackers</p>
+        <p>The Dashboard also allows you to configure the public call limits and modify your declared APIs</p>
+    </div>
+
+    <div class="doc-item">
+        <p class="doc-title">Canvas</p>
+        <p>This is the principal tool provided by our website. The canvas allows the user to generate within minutes a fully communicating hosted webpage with API calls and data conversion, as a proof of concept.</p>
+        <p>It is divided into two main views, the Template view and the Operation view</p>
+        <p>A template is basically just input fields, buttons and areas for rendering for exemple datatable, graphs, text or video. This fields can be registered as inputs or outputs of operations.</p>
+        <p>An operation a chain of data transformation and API calls, producing an output from an input : we transform an input into some kind of data, passed to a microservice. The result can be transformed or mapped as well, and passed to another MS or to the output of the operation.</p>
+        <p>You can test your operations live while connecting the APIs, and save them to be used in your templates.</p>
+        <p>Right now the Canvas executes the operations from the front-end (api calls included), which is not safe. We also push the saved data to postgre through REST, but that's obviously not satisfying as our JSON-based data is polymorph. We'll soon move to Kafka and Cassandra for the live saving, and Kafka and a dedicated microservice to resolve the DNS and run the API calls securely</p>
+    </div>
+    <br>
+    <div class="doc-item">
+        <p class="doc-title"> Future</p>
+        <p> This website was developed for my own usage, but I'm sure it will benefit a lot from the community. I only hope this community will grow, letting us share hosted components as an easy way to experiment, test your services and make proof-of-concepts within minutes.</p>
+        <p> A bit down the road, we'll hopefully join JHipster and JenkinX in their quest to simplify projects beginning and let the developers focus only on the business value, by generating and deploying a full working application with CD/CI with the same capabilities as the HJ version.</p>
+        <P>I wish to propose an isolated deploy container, to allow you to deploy a MS to the App simply from a github link, freely and within minutes.</P>
+        <p> A mobile app is also planned, that will take advantage of the wifi tethering abilities to generate a full network controlled by the app. Perfect for testing out robots or IOT components !</p>
+
+    </div>
+    </div>
+
