@@ -3,6 +3,7 @@ package org.highjack.ms3.gpioCore;
 import com.pi4j.io.gpio.PinMode;
 import org.highjack.ms3.web.rest.vm.GpioPinOperationWrapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public enum GpioActionEnum {
 
     private final String name;
     private final PinMode[] allowedModes;
-    private static List<GpioPinOperationWrapper> runtimeAddedOperations;
+    private static List<GpioPinOperationWrapper> runtimeAddedOperations = new ArrayList<>();
 
     GpioActionEnum(String name, PinMode[] allowedModes) {
         this.name = name;
@@ -52,7 +53,7 @@ if(runtimeAddedOperations!=null && !runtimeAddedOperations.isEmpty()){
         Optional<GpioPinOperationWrapper> opt = runtimeAddedOperations.stream().filter(wrap->wrap.getOperationName().equals(methodName)).findFirst();
          if(opt.isPresent()) {
              return opt.get();
-         } 
+         }
 
 }
              try {
@@ -60,7 +61,7 @@ if(runtimeAddedOperations!=null && !runtimeAddedOperations.isEmpty()){
              } catch(IllegalArgumentException e) {
                 return null;
              }
-         
+
     }
 
 

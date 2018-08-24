@@ -165,7 +165,7 @@ public class UseGpioService {
 
     public ResponseDTO registerGpioOperation(String gpioName, String... pinModes) {
 
-        PinMode[] modes = pinModes.length>0 ? (PinMode[])Arrays.stream(pinModes).map(PinMode::valueOf).toArray() : new PinMode[]{};
+        PinMode[] modes = (pinModes!=null && pinModes.length>0) ? (PinMode[])Arrays.stream(pinModes).map(PinMode::valueOf).toArray() : new PinMode[]{};
 
         GpioActionEnum.addRuntimeOperation(gpioName, modes);
         return new ResponseDTO(ResponseDTO.SUCCESS, "Operation added successfully");
