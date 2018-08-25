@@ -1,6 +1,7 @@
 package org.highjack.ms3.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.highjack.ms3.sService.ScalaService;
 import org.highjack.ms3.service.UseGpioService;
 import org.highjack.ms3.service.TestService;
 import org.highjack.ms3.web.rest.vm.ResponseDTO;
@@ -21,10 +22,12 @@ public class GpioAccessResource {
 
     private final UseGpioService gpioService;
 private final TestService testService;
+private final ScalaService scalaService;
 
-    public GpioAccessResource(UseGpioService gpioService,TestService testService) {
+    public GpioAccessResource(UseGpioService gpioService, TestService testService, ScalaService scalaService) {
         this.gpioService = gpioService;
-this.testService = testService;
+        this.testService = testService;
+        this.scalaService = scalaService;
     }
 
 
@@ -66,7 +69,20 @@ response =new ResponseDTO(ResponseDTO.FAILURE, "interruptedException");
 
    return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    @GetMapping("/unregister-all-gpio")
+
+
+    @GetMapping("/test-scala-from-java")
+    public  ResponseEntity<ResponseDTO> testScalaFromJava() {
+        ResponseDTO response;
+        try {
+            response =   new ResponseDTO(ResponseDTO.SUCCESS, "Hallo from a Scala controller! " + this.scalaService.getMessage());
+        } catch (Exception e) {
+            response = new ResponseDTO(ResponseDTO.FAILURE, "Exception");
+        }
+    return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+        @GetMapping("/unregister-all-gpio")
     public  ResponseEntity<ResponseDTO> unregisterAllGpio() {
         ResponseDTO response = this.gpioService.unregisterAllAndShutdown();
         return new ResponseEntity<>(response, HttpStatus.OK);
