@@ -23,15 +23,18 @@ public class ResponseDTO implements Serializable{
         this.result = result;
         this.message = message;
         this.data = data;
+        this.setStatus(result);
     }
 
     public ResponseDTO(int result) {
         this.result = result;
+        this.setStatus(result);
     }
 
     public ResponseDTO(int result, String message) {
         this.result = result;
         this.message = message;
+        this.setStatus(result);
     }
 
     public ResponseDTO() {
@@ -62,6 +65,10 @@ public class ResponseDTO implements Serializable{
         this.status = status;
     }
 
+    public void setStatus(int result) {
+        this.status = result ==SUCCESS ? "SUCCESS" : "FAILURE";
+    }
+
     public String getMessage() {
         return message;
     }
@@ -77,6 +84,8 @@ public class ResponseDTO implements Serializable{
     public void setData(Object data) {
         this.data = data;
     }
+
+
 
     @Override
     public String toString() {
