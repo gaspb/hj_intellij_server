@@ -1,9 +1,9 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="File '[scalapipeline] - ...\src\main\scala\org\highjack\scalapipeline\kafka\AkkaKafkaConsumer.scala'" />
-    <option name="defaultScopeName" value="File '[scalapipeline] - ...\src\main\scala\org\highjack\scalapipeline\kafka\AkkaKafkaConsumer.scala'" />
+    <option name="customScope" value="All Places" />
+    <option name="defaultScopeName" value="All Places" />
     <option name="showResultsInSeparateView" value="true" />
     <option name="SHOW_RESULTS_IN_SEPARATE_VIEW" value="true" />
-    <option name="SEARCH_SCOPE" value="File '[scalapipeline] - ...\src\main\scala\org\highjack\scalapipeline\kafka\AkkaKafkaConsumer.scala'" />
+    <option name="SEARCH_SCOPE" value="All Places" />
   </component>
 </application>
